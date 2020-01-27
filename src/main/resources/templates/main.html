@@ -5,7 +5,7 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Resumex - Professional HTML CSS Resume Website Template</title>
+    <title th:text='${overview.get("page-title")}'></title>
 
     <!-- favicon -->
     <link href="/favicon.png" rel=icon>
@@ -45,31 +45,28 @@
                     <img alt="" class="img-responsive" src="/img/img-profile.jpg"/>
                 </div>
                 <div class="content">
-                    <h1>Leon Weiß</h1>
-                    <span class="lead">Marketing Consultant</span>
+                    <h1><span th:text='${overview.get("name")}'></span></h1>
+                    <span class="lead" th:text='${overview.get("lead")}'></span>
 
-                    <div class="about-text">
-                        <p>
-                            Credibly embrace visionary internal or "organic" sources and business benefits.
-                            Collaboratively
-                            integrate efficient portals rather than customized customer service. Assertively deliver
-                            frictionless services via leveraged interfaces. Conveniently evisculate accurate sources and
-                            process-centric expertise.
-                        </p>
-
-                        <p>Energistically fabricate customized imperatives through cooperative catalysts for change.</p>
-
-
-                        <p><img alt="" class="img-responsive" src="img/Signature.png"/></p>
-                    </div>
-
+                    <div class="about-text"
+                         th:utext='${"<p>" + overview.get("about").replaceAll("\n\n", "</p><p>") + "</p>"}'></div>
 
                     <ul class="social-icon">
-                        <li><a href="#"><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i aria-hidden="true" class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i aria-hidden="true" class="fa fa-slack"></i></a></li>
-                        <li><a href="#"><i aria-hidden="true" class="fa fa-dribbble"></i></a></li>
+                        <li th:if='${!overview.get("social-facebook").isEmpty()}'><a target="_blank"
+                                                                                     th:href='${"https://facebook.com/" + overview.get("social-facebook")}'><i
+                                aria-hidden="true" class="fa fa-facebook"></i></a></li>
+                        <li th:if='${!overview.get("social-twitter").isEmpty()}'><a target="_blank"
+                                                                                    th:href='${"https://twitter.com/" + overview.get("social-twitter")}'><i
+                                aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                        <li th:if='${!overview.get("social-linkedin").isEmpty()}'><a target="_blank"
+                                                                                     th:href='${"https://linkedin.com/in/" + overview.get("social-linkedin")}'><i
+                                aria-hidden="true" class="fa fa-linkedin"></i></a></li>
+                        <li th:if='${!overview.get("social-slack").isEmpty()}'><a target="_blank"
+                                                                                  th:href='${overview.get("social-slack")}'><i
+                                aria-hidden="true" class="fa fa-slack"></i></a></li>
+                        <li th:if='${!overview.get("social-blog").isEmpty()}'><a target="_blank"
+                                                                                 th:href='${overview.get("social-blog")}'><i
+                                aria-hidden="true" class="fa fa-rss"></i></a></li>
                     </ul>
                 </div>
 
